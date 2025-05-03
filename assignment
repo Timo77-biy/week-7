@@ -1,0 +1,69 @@
+# Base class for Vehicles
+class Vehicle:
+    def __init__(self, brand, model):
+        self._brand = brand
+        self._model = model
+
+    # Getter for brand and model
+    @property
+    def description(self):
+        return f"{self._brand} {self._model}"
+
+    # Abstract-like method for polymorphism
+    def move(self):
+        raise NotImplementedError("Subclasses must implement move()")
+
+    def __str__(self):
+        return f"Vehicle: {self.description}"
+
+
+# Derived class for Car
+class Car(Vehicle):
+    def __init__(self, brand, model, top_speed):
+        super().__init__(brand, model)
+        self._top_speed = top_speed
+
+    def move(self):
+        return f"{self.description} is driving at {self._top_speed} mph! 🚗"
+
+
+# Derived class for Plane
+class Plane(Vehicle):
+    def __init__(self, brand, model, cruising_altitude):
+        super().__init__(brand, model)
+        self._cruising_altitude = cruising_altitude
+
+    def move(self):
+        return f"{self.description} is flying at {self._cruising_altitude} feet! ✈️"
+
+
+# Derived class for Boat
+class Boat(Vehicle):
+    def __init__(self, brand, model, max_knots):
+        super().__init__(brand, model)
+        self._max_knots = max_knots
+
+    def move(self):
+        return f"{self.description} is sailing at {self._max_knots} knots! ⛵"
+
+
+# Demonstration program
+def main():
+    # Create instances of different vehicles
+    car = Car("Toyota", "Camry", 120)
+    plane = Plane("Boeing", "737", 35000)
+    boat = Boat("Yamaha", "242X", 50)
+
+    # Store vehicles in a list to demonstrate polymorphism
+    vehicles = [car, plane, boat]
+
+    # Display vehicle details and their movement
+    print("Vehicle Fleet:")
+    for vehicle in vehicles:
+        print(f"- {vehicle}")
+        print(f"  Movement: {vehicle.move()}")
+        print()
+
+
+if __name__ == "__main__":
+    main()
